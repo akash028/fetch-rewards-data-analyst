@@ -33,38 +33,11 @@ I have provided complete solution and answers in the file SQL questions. I'm usi
 
 1. Top 5 brands by receipts scanned among users 21 and over?
 
-WITH users21AndOlder as\
- &emsp;   (select id \
- &emsp;&emsp;       from users \
- &emsp;&emsp;       where \
- &emsp;&emsp;&emsp;(CURRENT_DATE - DATE(birth_date))/ 365.25 >= 21)\
-select \
-&emsp;	 p.brand\
-&emsp;	,count(t.receipt_id) as transactions_count\
-from transactions t\
-&emsp;	join users21AndOlder u on t.user_id = u.id\
-&emsp;	join products p on p.barcode = t.barcode\
-where p.brand is not null\
-group by p.brand\
-order by count(t.receipt_id) desc\
-limit 5;
+![1SQL](screenshots/1SQL.png)
 
 2. Top 5 brands by sales among users that have had their account for atleast 6 months?
 
-WITH usersActiveFor6orMoreMonths as\
-&emsp;(select id \
-&emsp;&emsp;from users \
-&emsp;&emsp;where \
-&emsp;&emsp;&emsp;(CURRENT_DATE - DATE(created_date))>180 )\
-select p.brand\
-&emsp;&emsp;	   ,sum(t.sale) as total_sales\
-from transactions t\
-&emsp;&emsp;	join usersActiveFor6orMoreMonths u on u.id = t.user_id\
-&emsp;&emsp;	join products p on p.barcode = t.barcode\
-where p.brand is not null\
-group by p.brand\
-order by sum(t.sale) desc\
-limit 5;
+![2SQL](screenshots/2SQL.png)
 
 
 ### 2.2. Open-ended questions
@@ -72,6 +45,8 @@ limit 5;
 #### 2.2.1. Leading brand in the Dips and Salsa category?
 
 I’m defining a leading brand as the brand which has a higher number of transactions and higher sales as well. I tried to find if there is a brand with less number of transactions but higher sales and there was not. In both cases there is one clear winner that is ‘Tostitos’.
+
+![3SQL](screenshots/3SQL.png)
 
 #### 2.2.2 What percent Fetch grown year over year?
 
@@ -81,6 +56,8 @@ First I’m finding the new years in each year and also the total users using th
 (this_year_new_users_count / last_year_total_users_count)* 100.
 
 The next step is simple to calculate the average YoY growth, the output as follows. Based on assumptions I made and looking at only the new customer base acquired each year, it is safe to say Fetch grew 152.65% YoY over the last 10 years.
+
+![4SQL](screenshots/4SQL.png)
 
 
 ## 3. Email
