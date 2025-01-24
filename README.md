@@ -60,6 +60,9 @@ The next step is simple to calculate the average YoY growth, the output as follo
 ![4SQL](screenshots/4SQL.png)
 
 
+![5SQL](screenshots/5SQL.png)
+
+
 ## 3. Email
 
 Below is the sample email I would draft to convey the points I understood during analysis.
